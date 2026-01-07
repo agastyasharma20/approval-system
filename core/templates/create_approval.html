@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Create Approval</title>
+</head>
+<body>
+
+<h2>Create Approval Request</h2>
+
+<form method="post">
+    {% csrf_token %}
+
+    <label>Title:</label><br>
+    <input type="text" name="title" required><br><br>
+
+    <label>Description:</label><br>
+    <textarea name="description" required></textarea><br><br>
+
+    <label>Approver:</label><br>
+    <select name="approver" required>
+        {% for approver in approvers %}
+            <option value="{{ approver.id }}">
+                {{ approver.username }}
+            </option>
+        {% endfor %}
+    </select><br><br>
+
+    <label>Urgency:</label><br>
+    <select name="urgency">
+        <option value="LOW">Low</option>
+        <option value="MEDIUM">Medium</option>
+        <option value="HIGH">High</option>
+        <option value="CRITICAL">Critical</option>
+    </select><br><br>
+
+    <button type="submit">Submit</button>
+</form>
+
+<br>
+<a href="/dashboard/">Back to Dashboard</a>
+
+</body>
+</html>
